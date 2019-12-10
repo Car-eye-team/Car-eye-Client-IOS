@@ -1,0 +1,12 @@
+
+/* Class = "UITextField"; placeholder = "请您输入IP和端口"; ObjectID = "6rX-5V-DFg"; */
+"6rX-5V-DFg.placeholder" = "请您输入IP和端口";
+
+/* Class = "UITextField"; placeholder = "请您输入密码"; ObjectID = "CAC-IH-FHg"; */
+"CAC-IH-FHg.placeholder" = "请您输入密码";
+
+/* Class = "UITextField"; placeholder = "请您输入用户名"; ObjectID = "SxH-KX-j9b"; */
+"SxH-KX-j9b.placeholder" = "请您输入用户名";
+
+/* Class = "UIButton"; normalTitle = "登录"; ObjectID = "UKC-aQ-6fk"; */
+"UKC-aQ-6fk.normalTitle" = "登录";
