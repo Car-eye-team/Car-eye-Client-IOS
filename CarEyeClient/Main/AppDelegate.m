@@ -10,6 +10,8 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <Bugly/Bugly.h>
 #import <BaiduMapAPI_Base/BMKBaseComponent.h>//引入base相关所有的头文件
+#import <CoreTelephony/CTCellularData.h>
+#import <AFNetworking.h>
 
 #import "LoginViewController.h"
 #import "MainViewController.h"
@@ -27,6 +29,14 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+//    //1.获取网络权限 根绝权限进行人机交互
+//    if (__IPHONE_10_0) {
+//        [self networkStatus:application didFinishLaunchingWithOptions:launchOptions];
+//    } else {
+//        //2.2已经开启网络权限 监听网络状态
+//        [self addReachabilityManager:application didFinishLaunchingWithOptions:launchOptions];
+//    }
     
     // 要使用百度地图，请先启动BaiduMapManager
     BMKMapManager *mapManager = [[BMKMapManager alloc] init];
@@ -81,6 +91,79 @@
     return YES;
 }
 
+/*
+ CTCellularData在iOS9之前是私有类，权限设置是iOS10开始的，所以App Store审核没有问题
+ 获取网络权限状态
+ */
+- (void)networkStatus:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //2.根据权限执行相应的交互
+    CTCellularData *cellularData = [[CTCellularData alloc] init];
+    
+    /*
+     此函数会在网络权限改变时再次调用
+     */
+    cellularData.cellularDataRestrictionDidUpdateNotifier = ^(CTCellularDataRestrictedState state) {
+        switch (state) {
+            case kCTCellularDataRestricted:
+                
+                NSLog(@"Restricted");
+                //2.1权限关闭的情况下 再次请求网络数据会弹出设置网络提示
+//                [self getAppInfo];
+                break;
+            case kCTCellularDataNotRestricted:
+                
+                NSLog(@"NotRestricted");
+                //2.2已经开启网络权限 监听网络状态
+                [self addReachabilityManager:application didFinishLaunchingWithOptions:launchOptions];
+                //                [self getInfo_application:application didFinishLaunchingWithOptions:launchOptions];
+                break;
+            case kCTCellularDataRestrictedStateUnknown:
+                
+                NSLog(@"Unknown");
+                //2.3未知情况 （还没有遇到推测是有网络但是连接不正常的情况下）
+//                [self getAppInfo];
+                break;
+                
+            default:
+                break;
+        }
+    };
+}
 
+/**
+ 实时检查当前网络状态
+ */
+- (void)addReachabilityManager:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    AFNetworkReachabilityManager *afNetworkReachabilityManager = [AFNetworkReachabilityManager sharedManager];
+    
+    //这个可以放在需要侦听的页面
+    //    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(afNetworkStatusChanged:) name:AFNetworkingReachabilityDidChangeNotification object:nil];
+    [afNetworkReachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        switch (status) {
+            case AFNetworkReachabilityStatusNotReachable:{
+                NSLog(@"网络不通：%@",@(status) );
+                break;
+            }
+            case AFNetworkReachabilityStatusReachableViaWiFi:{
+                NSLog(@"网络通过WIFI连接：%@",@(status));
+//                if (self.mallConfigModel == nil) {
+//                    [self getInfo_application:application didFinishLaunchingWithOptions:launchOptions];
+//                }
+                break;
+            }
+            case AFNetworkReachabilityStatusReachableViaWWAN:{
+                NSLog(@"网络通过无线连接：%@",@(status) );
+//                if (self.mallConfigModel == nil) {
+//                    [self getInfo_application:application didFinishLaunchingWithOptions:launchOptions];
+//                }
+                break;
+            }
+            default:
+                break;
+        }
+    }];
+    
+    [afNetworkReachabilityManager startMonitoring];  //开启网络监视器；
+}
 
 @end

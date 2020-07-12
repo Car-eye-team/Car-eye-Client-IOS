@@ -48,11 +48,36 @@
     LQViewBorderRadius(self.nameView, 6.0, 1, UIColorFromRGB(LQThemeColor));
     LQViewBorderRadius(self.pwdView, 6.0, 1, UIColorFromRGB(LQThemeColor));
     
-//    NSString *name = [[LoginInfoLocalData sharedInstance] gainName];
-//    NSString *pwd = [[LoginInfoLocalData sharedInstance] gainPWD];
-//    NSString *ip = [[LoginInfoLocalData sharedInstance] gainIP];
-//    NSString *port = [[LoginInfoLocalData sharedInstance] gainPort];
+    NSString *name = [[LoginInfoLocalData sharedInstance] gainName];
+    NSString *pwd = [[LoginInfoLocalData sharedInstance] gainPWD];
+    NSString *ip = [[LoginInfoLocalData sharedInstance] gainIP];
+    NSString *port = [[LoginInfoLocalData sharedInstance] gainPort];
     
+    if (name && ![name isEqualToString:@""]) {
+        self.nameTv.text = name;
+    } else {
+        self.nameTv.text = @"admin";
+    }
+    
+    if (pwd && ![pwd isEqualToString:@""]) {
+        self.pwdTv.text = pwd;
+    } else {
+        self.pwdTv.text = @"careyeadmin";
+    }
+    
+    if (ip && ![ip isEqualToString:@""]) {
+        self.ipTv.text = ip;
+    } else {
+        self.ipTv.text = @"www.liveoss.com";
+//        self.ipTv.text = @"39.108.229.40";
+    }
+    
+    if (port && ![port isEqualToString:@""]) {
+        self.portTv.text = port;
+    } else {
+        self.portTv.text = @"8088";
+//        self.portTv.text = @"8902";
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -74,7 +99,28 @@
 #pragma mark - LQViewControllerProtocol
 
 - (void)bindViewModel {
+    RAC(self.viewModel.account, ip) = self.ipTv.rac_textSignal;
+    RAC(self.viewModel.account, name) = self.nameTv.rac_textSignal;
+    RAC(self.viewModel.account, pwd) = self.pwdTv.rac_textSignal;
+    RAC(self.viewModel.account, port) = self.portTv.rac_textSignal;
     
+    [self.viewModel.loginResultSubject subscribeNext:^(id x) {
+        [self hideHub];
+        
+        if (x) {
+            // 登录失败
+            [self showTextHubWithContent:x];
+        } else {
+            [self.loginSuccessSubject sendNext:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccess" object:nil];
+            
+            if (self.isPresent) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            } else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }
+    }];
 }
 
 #pragma mark - click listener

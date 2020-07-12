@@ -10,6 +10,7 @@
 
 static NSString *rateKey = @"rateKey";
 static NSString *termKey = @"termKey";
+static NSString *channelKey = @"channelKey";
 
 @implementation CarLocalData
 
@@ -75,5 +76,19 @@ static CarLocalData *instance;
     
     return term;
 }
+
+- (void) saveChannel:(int)num {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setInteger:num forKey:channelKey];
+    [defaults synchronize];
+}
+
+- (int) gainChannel {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int num = (int) [defaults integerForKey:channelKey];
+    
+    return num;
+}
+
 
 @end

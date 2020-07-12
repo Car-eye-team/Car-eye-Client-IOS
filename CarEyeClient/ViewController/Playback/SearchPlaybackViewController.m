@@ -2,7 +2,7 @@
 //  SearchPlaybackViewController.m
 //  CarEyeClient
 //
-//  Created by liyy on 2019/10/24.
+//  Created by asd on 2019/10/24.
 //  Copyright © 2019年 CarEye. All rights reserved.
 //
 
@@ -66,7 +66,21 @@
     
     [self setClickListener];
     
-    
+    if (self.param) {
+        _car = self.param.car;
+        _carNoLabel.text = self.param.car.nodeName;
+        
+        self.mLocation = self.param.location;
+        self.fileNameLabel.text = _files[self.mLocation];
+        
+        [self updateChannles];
+        self.mChannel = self.param.channel;
+        self.channelNameLabel.text = [self.channel objectAtIndex:self.mChannel];
+        
+        self.dateLabel.text = [self.param.begTime componentsSeparatedByString:@" "][0];
+        self.startTimeLabel.text = [self.param.begTime componentsSeparatedByString:@" "][1];
+        self.endTimeLabel.text = [self.param.endTime componentsSeparatedByString:@" "][1];
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -97,6 +111,20 @@
         }
     }];
     
+    [_dateView setClickListener:^(id result) {
+        CXDatePickerView *dateView;
+        if (self.date) {
+            dateView = [[CXDatePickerView alloc] initWithDateStyle:CXDateStyleShowYearMonthDay scrollToDate:self.date CompleteBlock:^(NSDate *date) {
+                [self dealDate:date];
+            }];
+        } else {
+            dateView = [[CXDatePickerView alloc] initWithDateStyle:CXDateStyleShowYearMonthDay CompleteBlock:^(NSDate *date) {
+                [self dealDate:date];
+            }];
+        }
+        
+        [dateView show];
+    }];
     
     [_startTimeView setClickListener:^(id result) {
         CXDatePickerView *dateView;
@@ -146,7 +174,22 @@
 }
 
 - (void) showFile {
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"文件位置" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
+    UIAlertAction *action1 = [UIAlertAction actionWithTitle:_files[0] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.fileNameLabel.text = self.files[0];
+        self.mLocation = 0;
+    }];
+    UIAlertAction *action2 = [UIAlertAction actionWithTitle:_files[1] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        self.fileNameLabel.text = self.files[1];
+        self.mLocation = 1;
+    }];
+    
+    [actionSheet addAction:action1];
+    [actionSheet addAction:action2];
+    
+    //相当于之前的[actionSheet show];
+    [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 - (void) showChannel {

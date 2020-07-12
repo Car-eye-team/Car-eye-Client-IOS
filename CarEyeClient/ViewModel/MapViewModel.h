@@ -2,7 +2,7 @@
 //  MapViewModel.h
 //  CarEyeClient
 //
-//  Created by liyy on 2019/11/4.
+//  Created by asd on 2019/11/4.
 //  Copyright © 2019年 CarEye. All rights reserved.
 //
 
@@ -19,6 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) RACSubject *dataSubject;
 @property (nonatomic, strong) RACCommand *dataCommand;
+
+@property (nonatomic, copy) NSString *versionURL;
+@property (nonatomic, copy) NSString *appStoreURL;
+
+@property (nonatomic, strong) RACCommand *versionCommand;
+@property (nonatomic, strong) RACSubject *updateVersionSubject;
 
 @end
 

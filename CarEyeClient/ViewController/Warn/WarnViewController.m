@@ -2,12 +2,14 @@
 //  WarnViewController.m
 //  CarEyeClient
 //
-//  Created by liyy on 2019/10/23.
+//  Created by asd on 2019/10/23.
 //  Copyright © 2019 CarEye. All rights reserved.
 //
 
 #import "WarnViewController.h"
+#import "SettingViewController.h"
 #import "SearchTrackViewController.h"
+#import "WarnDetailViewController.h"
 #import "WarnViewModel.h"
 #import "WarnCell.h"
 #import "RefreshGifHeader.h"
@@ -84,12 +86,13 @@
 }
 
 - (void) setting {
-    
+    SettingViewController *vc = [[SettingViewController alloc] initWithStoryborad];
+    [self basePushViewController:vc];
 }
 
 - (void) search {
     SearchTrackViewController *vc = [[SearchTrackViewController alloc] initWithStoryborad];
-    vc.title = @"搜索";
+    vc.navTitle = @"报警查询";
     vc.param = self.vm.param;
     [vc.subject subscribeNext:^(SearchParam *p) {
         [self showHub];
@@ -113,7 +116,19 @@
 #pragma mark - LQViewControllerProtocol
 
 - (void)bindViewModel {
-    
+    [self.vm.msgSubject subscribeNext:^(id x) {
+        [self hideHub];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        
+        [self.tableView reloadData];
+        
+        if (self.vm.data.count == 0) {
+            self.promptView.hidden = NO;
+        } else {
+            self.promptView.hidden = YES;
+        }
+    }];
 }
 
 - (WarnViewModel *) vm {
@@ -131,6 +146,11 @@
         return;
     }
     
+    Alarm *model = self.vm.data[indexPath.row];
+    WarnDetailViewController *vc = [[WarnDetailViewController alloc] initWithStoryborad];
+    vc.alarm = model;
+    vc.nodeName = self.vm.param.car.nodeName;
+    [self basePushViewController:vc];
 }
 
 #pragma mark - UITableViewDataSource

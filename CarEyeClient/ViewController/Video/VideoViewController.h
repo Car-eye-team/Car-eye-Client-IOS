@@ -2,7 +2,7 @@
 //  VideoViewController.h
 //  CarEyeClient
 //
-//  Created by liyy on 2019/10/23.
+//  Created by asd on 2019/10/23.
 //  Copyright © 2019 CarEye. All rights reserved.
 //
 
@@ -16,10 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface VideoViewController : BaseViewController
 
 @property (atomic, retain) id<IJKMediaPlayback> currentPlayer;
-@property (atomic, retain) id<IJKMediaPlayback> player1;
-@property (atomic, retain) id<IJKMediaPlayback> player2;
-@property (atomic, retain) id<IJKMediaPlayback> player3;
-@property (atomic, retain) id<IJKMediaPlayback> player4;
+@property (nonatomic, strong) NSMutableArray *players;
+@property (nonatomic, strong) NSMutableArray *urls;
+@property (nonatomic, strong) NSMutableArray *recordUrls;
+@property (nonatomic, strong) NSMutableArray *isRecords;
+@property (nonatomic, assign) int current;
 
 - (instancetype) initWithStoryborad;
 

@@ -2,7 +2,7 @@
 //  FullPlayerViewModel.m
 //  CarEyeClient
 //
-//  Created by liyy on 2019/11/7.
+//  Created by asd on 2019/11/7.
 //  Copyright © 2019年 CarEye. All rights reserved.
 //
 

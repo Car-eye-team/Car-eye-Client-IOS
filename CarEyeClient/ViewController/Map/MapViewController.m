@@ -2,11 +2,12 @@
 //  MapViewController.m
 //  CarEyeClient
 //
-//  Created by liyy on 2019/10/20.
+//  Created by asd on 2019/10/20.
 //  Copyright © 2019年 CarEye. All rights reserved.
 //
 
 #import "MapViewController.h"
+#import "SettingViewController.h"
 #import "CarTreeViewController.h"
 #import "CarTreeViewModel.h"
 #import "SelectView.h"
@@ -19,6 +20,7 @@
 #import <BaiduMapAPI_Search/BMKSearchComponent.h>
 #import "UIExPickerView.h"
 #import "CustomPaopaoView.h"
+#import "VersionUpdateView.h"
 
 @interface MapViewController ()<BMKMapViewDelegate, BMKLocationAuthDelegate, BMKLocationManagerDelegate, pickerDelegate, BMKGeoCodeSearchDelegate>
 
@@ -119,6 +121,8 @@
             // Fallback on earlier versions
         }
     } else {
+        self.carNoLabel.text = @"";
+        self.timeLabel.text = @"";
         [self showTextHubWithContent:@"当前没有选定车"];
     }
 }
@@ -141,7 +145,8 @@
 }
 
 - (void) setting {
-    
+    SettingViewController *vc = [[SettingViewController alloc] initWithStoryborad];
+    [self basePushViewController:vc];
 }
 
 - (void) search {
@@ -152,7 +157,38 @@
 #pragma mark - LQViewControllerProtocol
 
 - (void)bindViewModel {
+    _vm = [[CarTreeViewModel alloc] init];
+    [self.vm.dataCommand execute:nil];
+    [self.vm.dataSubject subscribeNext:^(id x) {
+        NSLog(@"获取到所有车辆信息");
+    }];
     
+    [self.viewModel.dataSubject subscribeNext:^(id x) {
+        [[CarLocalData sharedInstance] saveTerminal:self.viewModel.model.terminal];
+        self.carNoLabel.text = self.viewModel.model.carnumber;
+        self.timeLabel.text = [self.viewModel.model gpstimeDesc];
+        
+        // 获取数据后 赋值
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([self.viewModel.model bLatitude], [self.viewModel.model bLongitude]);
+        [self geoCodeSearch:coordinate];
+    }];
+    
+    // 检查版本更新
+    [self.viewModel.versionCommand execute:nil];
+    // 弹出版本更新提示
+    [self.viewModel.updateVersionSubject subscribeNext:^(NSString *content) {
+        VersionUpdateView *updateView = [[VersionUpdateView alloc] init];
+        [updateView setContent:content];
+        [updateView setUpdateVersionListener:^{
+            if (@available(iOS 10.0, *)) {
+                NSURL *stpneUrl = [NSURL URLWithString:self.viewModel.appStoreURL];
+                [[UIApplication sharedApplication] openURL:stpneUrl options:@{} completionHandler:nil];
+            } else {
+                // Fallback on earlier versions
+            }
+        }];
+        [updateView showView:[UIApplication sharedApplication].keyWindow];
+    }];
 }
 
 - (MapViewModel *) viewModel {
@@ -204,6 +240,26 @@
         _locationManager.locationTimeout = 10;
         //设置获取地址信息超时时间
         _locationManager.reGeocodeTimeout = 10;
+        
+        [_locationManager requestLocationWithReGeocode:YES withNetworkState:YES completionBlock:^(BMKLocation * _Nullable location, BMKLocationNetworkState state, NSError * _Nullable error) {
+            //获取经纬度和该定位点对应的位置信息
+            
+            if (error) {
+                NSLog(@"locError:{%ld - %@};", (long)error.code, error.localizedDescription);
+            }
+            
+            if (location) {//得到定位信息，添加annotation
+                BMKUserLocation *userLocation = [[BMKUserLocation alloc] init];
+                userLocation.location = location.location;
+                [self.mapView updateLocationData:userLocation];
+                
+                self.terminal = [[CarLocalData sharedInstance] gainTerminal];
+                if (self.terminal && ![self.terminal isEqualToString:@""]) {
+                    self.viewModel.terminal = self.terminal;
+                    [self.viewModel.dataCommand execute:nil];
+                }
+            }
+        }];
     }
     
     return _locationManager;

@@ -2,7 +2,7 @@
 //  PlaybackCell.h
 //  CarEyeClient
 //
-//  Created by liyy on 2019/11/6.
+//  Created by asd on 2019/11/6.
 //  Copyright © 2019年 CarEye. All rights reserved.
 //
 
@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *startLabel;
 @property (nonatomic, strong) UILabel *endLabel;
+@property (nonatomic, strong) UILabel *channelLabel;
 
 @property (nonatomic, strong) TerminalFile *model;
 

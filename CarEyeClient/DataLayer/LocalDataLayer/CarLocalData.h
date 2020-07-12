@@ -24,4 +24,7 @@
 - (void) saveTerminal:(NSString *)term;
 - (NSString *) gainTerminal;
 
+- (void) saveChannel:(int)num;
+- (int) gainChannel;
+
 @end

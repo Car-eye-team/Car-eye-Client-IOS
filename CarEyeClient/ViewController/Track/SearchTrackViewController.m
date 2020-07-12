@@ -2,7 +2,7 @@
 //  SearchTrackViewController.m
 //  CarEyeClient
 //
-//  Created by liyy on 2019/10/24.
+//  Created by asd on 2019/10/24.
 //  Copyright © 2019年 CarEye. All rights reserved.
 //
 
@@ -41,8 +41,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (self.title) {
-        self.navigationItem.title = self.title;
+    if (self.navTitle) {
+        self.navigationItem.title = self.navTitle;
     } else {
         self.navigationItem.title = @"轨迹搜索";
     }

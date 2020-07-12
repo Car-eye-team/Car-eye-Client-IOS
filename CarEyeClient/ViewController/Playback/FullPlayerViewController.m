@@ -2,7 +2,7 @@
 //  FullPlayerViewController.m
 //  CarEyeClient
 //
-//  Created by liyy on 2019/11/7.
+//  Created by asd on 2019/11/7.
 //  Copyright © 2019 CarEye. All rights reserved.
 //
 
@@ -35,6 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"录像";
     self.view.backgroundColor = [UIColor blackColor];
     
     // 得到图片的路径
@@ -63,15 +64,17 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+//    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     self.statusBarHidden = YES;
     [self prefersStatusBarHidden];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [self.player shutdown];
+    [self.player pause];
+//    [self.player stop];
+//    [self.player shutdown];
     [self.player.view removeFromSuperview];
-    self.player = nil;
+//    self.player = nil;
 }
 
 #pragma mark - Notification
@@ -202,9 +205,27 @@
     [IJKFFMoviePlayerController checkIfFFmpegVersionMatch:YES];
     
     IJKFFOptions *options = [IJKFFOptions optionsByDefault];
+    [options setFormatOptionIntValue:1000000 forKey:@"analyzeduration"]; // 21s
+    [options setFormatOptionIntValue:2048 forKey:@"probesize"];// 2048或者204800
+    [options setFormatOptionIntValue:0 forKey:@"auto_convert"];
+    [options setFormatOptionIntValue:1 forKey:@"reconnect"];
+    [options setFormatOptionIntValue:10 forKey:@"timeout"];
+    [options setPlayerOptionIntValue:0 forKey:@"packet-buffering"];
+    [options setFormatOptionValue:@"nobuffer" forKey:@"fflags"];
+    // udp tcp
+    [options setFormatOptionValue:@"tcp" forKey:@"rtsp_transport"];
+    
+    // RTSP流对应的iformat的是rtsp,rtmp流对应的iformat的是flv,m3u8流对应的iformat的是hls
+    if ([[urlStr substringToIndex:4] isEqualToString:@"rtmp"]) {
+        [options setFormatOptionValue:@"flv" forKey:@"iformat"];
+    } else if ([[urlStr substringToIndex:4] isEqualToString:@"m3u8"]) {
+        [options setFormatOptionValue:@"hls" forKey:@"iformat"];
+    } else {
+        [options setFormatOptionValue:@"rtsp" forKey:@"iformat"];
+    }
     
     NSURL *url = [NSURL URLWithString:urlStr];
-    self.player = [[IJKFFMoviePlayerController alloc] initWithContentURL:url withOptions:options];
+    self.player = [[IJKFFMoviePlayerController alloc] initWithContentURL:url withOptions:options key:@"CarEyeClient"];
     
     if (self.player) {
         self.player.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -225,7 +246,27 @@
 #pragma mark - LQViewControllerProtocol
 
 - (void)bindViewModel {
+    self.vm.terminal = self.terminal;
+    self.vm.file = self.file;
     
+    [self showHubWithLoadText:@"加载中"];
+    [self.vm.dataCommand execute:nil];
+    
+    [self.vm.dataSubject subscribeNext:^(id x) {
+        [self hideHub];
+        NSLog(@"playUrl ==>> %@", self.vm.playUrl);
+        
+        if (!self.vm.playUrl || [self.vm.playUrl isEqualToString:@""]) {
+            [self.navigationController popViewControllerAnimated:YES];
+            return ;
+        }
+        
+        [self play:self.vm.playUrl];
+        
+        [self installMovieNotificationObservers];
+        [self.player prepareToPlay];
+        [self.player play];
+    }];
 }
 
 - (FullPlayerViewModel *) vm {
@@ -235,6 +276,5 @@
     
     return _vm;
 }
-
 
 @end

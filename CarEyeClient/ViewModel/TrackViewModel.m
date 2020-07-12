@@ -2,7 +2,7 @@
 //  PlaybackViewModel.m
 //  CarEyeClient
 //
-//  Created by liyy on 2019/11/5.
+//  Created by asd on 2019/11/5.
 //  Copyright © 2019年 CarEye. All rights reserved.
 //
 
@@ -37,6 +37,36 @@
             [self.dataSubject sendNext:@"no data"];
         }
     }];
+}
+
+// 获取设备历史轨迹数据
+- (RACCommand *) dataCommand {
+    if (!_dataCommand) {
+        _dataCommand = [[RACCommand alloc] initWithSignalBlock:^RACSignal *(id input) {
+            NSString *ip = [[LoginInfoLocalData sharedInstance] gainIPAddress];
+            NSString *url = [NSString stringWithFormat:@"%@/getHistoryTrack", ip];
+            
+            NSString *name = [[LoginInfoLocalData sharedInstance] gainName];
+            NSString *pwd = [[LoginInfoLocalData sharedInstance] gainPWD];
+            NSString *tradeno = [DateUtil signDate];
+            NSString *str = [NSString stringWithFormat:@"%@%@%@", name, pwd, tradeno];
+            NSString *sign = [MD5Util md5:str];
+            
+            NSDictionary *param = @{ @"tradeno" : tradeno,
+                                     @"username" : (name ? name : @""),
+                                     @"sign" : sign,
+                                     @"carnumber" : self.param.car.nodeName,
+//                                     @"terminal" : self.param.car.terminal,
+                                     @"terminal" : @"",
+                                     @"startTime" : self.param.begTime,
+                                     @"endTime" : self.param.endTime
+                                     };
+            
+            return [self.request httpPostRequest:url params:param requestModel:nil];
+        }];
+    }
+    
+    return _dataCommand;
 }
 
 - (RACSubject *) dataSubject {

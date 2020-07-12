@@ -2,7 +2,7 @@
 //  CarTreeViewController.m
 //  CarEyeClient
 //
-//  Created by liyy on 2019/10/24.
+//  Created by asd on 2019/10/24.
 //  Copyright © 2019年 CarEye. All rights reserved.
 //
 
@@ -79,7 +79,15 @@
 #pragma mark - LQViewControllerProtocol
 
 - (void)bindViewModel {
+    if ([AppDelegate sharedDelegate].allCars) {
+        [self uploadDataWithAll:YES];
+    } else {
+        [self.vm.dataCommand execute:nil];
+    }
     
+    [self.vm.dataSubject subscribeNext:^(id x) {
+        [self uploadDataWithAll:YES];
+    }];
 }
 
 - (void) uploadDataWithAll:(BOOL)isAll {
@@ -95,6 +103,35 @@
     
     [self.showCars removeAllObjects];
     
+    for (int i = 0; i < self.resultCars.count; i++) {
+        DepartmentCar *car = self.resultCars[i];
+        car.index = i;
+        car.isShow = NO;
+        
+        if (_keyword && ![_keyword isEqualToString:@""]) {
+            if (car.nodetype == 1) {
+                car.isExpand = YES;
+                car.isShow = YES;
+            } else if ([car.nodeName containsString:_keyword]) {
+                car.isShow = YES;
+            }
+        } else {
+            if ([car.parentId isEqualToString:@"0"]) {
+                car.isExpand = NO;
+                car.isShow = YES;
+                car.depth = 0;
+            } else {
+                car.isExpand = NO;
+                car.isShow = NO;
+                car.depth = 1;
+            }
+        }
+        
+        if (car.isShow) {
+            [self.showCars addObject:car];
+        }
+    }
+    
     [self.tableView reloadData];
 }
 
@@ -103,6 +140,10 @@
         DepartmentCar *car = self.resultCars.firstObject;
         car.isExpand = NO;
         car.isShow = YES;
+        
+        [self.showCars removeAllObjects];
+        [self.showCars addObject:car];
+        [self.tableView reloadData];
         
         return;
     }
@@ -115,11 +156,19 @@
         if ([car.parentId isEqualToString:model.nodeId]) {
             car.isShow = NO;
             
+            if (car.nodetype == 1) {
+                car.isExpand = NO;
+                [parentIds addObject:car.nodeId];
+            }
         } else {
             for (NSString *pid in parentIds) {
                 if ([pid isEqualToString:car.parentId]) {
                     car.isShow = NO;
                     
+                    if (car.nodetype == 1) {
+                        car.isExpand = NO;
+                        [parentIds addObject:car.nodeId];
+                    }
                 }
             }
         }
@@ -165,16 +214,49 @@
         // 直接选中车辆，则返回
         [AppDelegate sharedDelegate].car = model;
         [[CarLocalData sharedInstance] saveTerminal:model.terminal];
+        [[CarLocalData sharedInstance] saveChannel:model.channeltotals];
         
         [self.subject sendNext:model];
         [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        model.isExpand = !model.isExpand;
+        
+        [self.showCars removeAllObjects];
+        
+        if (model.isExpand) {
+            for (DepartmentCar *car in self.resultCars) {
+                if ([car.parentId isEqualToString:model.nodeId]) {
+                    if (_keyword && ![_keyword isEqualToString:@""]) {
+                        if ([car.nodeName containsString:_keyword]) {
+                            car.isShow = YES;
+                        }
+                    } else {
+                        car.isShow = YES;
+//                        car.depth = model.depth + 1;
+                    }
+                }
+                
+                if (car.isShow) {
+                    [self.showCars addObject:car];
+                }
+            }
+            [self.tableView reloadData];
+        } else {
+            [self closeOrg:model];
+        }
     }
 }
 
 #pragma mark - click
 
 - (IBAction)search:(id)sender {
+    self.keyword = self.tf.text;
     
+    if ([_keyword isEqualToString:@""]) {
+        return;
+    }
+    
+    [self uploadDataWithAll:_isAll];
 }
 
 - (CarTreeViewModel *) vm {

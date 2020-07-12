@@ -2,7 +2,7 @@
 //  FullPlayerViewController.h
 //  CarEyeClient
 //
-//  Created by liyy on 2019/11/7.
+//  Created by asd on 2019/11/7.
 //  Copyright © 2019 CarEye. All rights reserved.
 //
 

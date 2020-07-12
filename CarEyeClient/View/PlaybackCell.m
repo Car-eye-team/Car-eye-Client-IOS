@@ -2,7 +2,7 @@
 //  PlaybackCell.m
 //  CarEyeClient
 //
-//  Created by liyy on 2019/11/6.
+//  Created by asd on 2019/11/6.
 //  Copyright © 2019年 CarEye. All rights reserved.
 //
 
@@ -23,7 +23,7 @@
         cell = [[PlaybackCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
-    //    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
@@ -43,7 +43,7 @@
             make.left.equalTo(@8);
             make.centerY.equalTo(self);
             make.height.equalTo(@68);
-            make.width.equalTo(@120);
+            make.width.equalTo(@110);
         }];
         
         UIImageView *iv1 = [[UIImageView alloc] init];
@@ -62,7 +62,7 @@
         [self addSubview:_startLabel];
         [_startLabel makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(iv.mas_right).offset(8);
-            make.top.equalTo(@20);
+            make.top.equalTo(@10);
         }];
         
         _endLabel = [[UILabel alloc] init];
@@ -71,7 +71,16 @@
         [self addSubview:_endLabel];
         [_endLabel makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(iv.mas_right).offset(8);
-            make.bottom.equalTo(@(-20));
+            make.bottom.equalTo(@(-10));
+        }];
+        
+        _channelLabel = [[UILabel alloc] init];
+        _channelLabel.textColor = UIColorFromRGB(0x333333);
+        _channelLabel.font = [UIFont systemFontOfSize:14];
+        [self addSubview:_channelLabel];
+        [_channelLabel makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(iv1.mas_left).offset(-4);
+            make.centerY.equalTo(self);
         }];
         
         UIView *line2 = [[UIView alloc] init];
@@ -91,6 +100,7 @@
 - (void) setModel:(TerminalFile *)model {
     _startLabel.text = [model startTime2];
     _endLabel.text = [model endTime2];
+    _channelLabel.text = [NSString stringWithFormat:@"通道%@", model.logicChannel];
 }
 
 @end

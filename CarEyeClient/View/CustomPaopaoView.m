@@ -2,7 +2,7 @@
 //  CustomPaopaoView.m
 //  CarEyeClient
 //
-//  Created by liyy on 2019/11/8.
+//  Created by asd on 2019/11/8.
 //  Copyright © 2019年 CarEye. All rights reserved.
 //
 
@@ -59,9 +59,17 @@
 }
 
 - (void) setModel:(CarInfoGPS *)model {
+    NSString *text = [NSString stringWithFormat:@"%@\n经度：%.6f 纬度：%.6f\n方向：%@\n速度：%@千米/小时\n地址：%@\n更新时间：%@",
+                      model.carnumber,
+                      [model bLongitude],
+                      [model bLatitude],
+                      [model parseDirection:model.direction],
+                      model.speed,
+                      model.address,
+                      [model gpstimeDesc]
+                      ];
     
-    
-    _label.text = @"";
+    _label.text = text;
 }
 
 @end

@@ -22,6 +22,7 @@
 		660011812374777700D2C197 /* TrackViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6600117F2374777700D2C197 /* TrackViewModel.m */; };
 		660011842375B79800D2C197 /* CustomPaopaoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 660011832375B79800D2C197 /* CustomPaopaoView.m */; };
 		660011872376E32F00D2C197 /* VideoViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 660011862376E32F00D2C197 /* VideoViewModel.m */; };
+		6608A57D239D23C900FF203E /* WarnDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6608A57C239D23C900FF203E /* WarnDetailViewController.m */; };
 		66161D2F2374454700FE144A /* IJKMediaFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66161D2E2374454700FE144A /* IJKMediaFramework.framework */; };
 		66161D332374456000FE144A /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66161D322374456000FE144A /* VideoToolbox.framework */; };
 		66161D352374456800FE144A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66161D342374456800FE144A /* UIKit.framework */; };
@@ -50,6 +51,8 @@
 		66255BC3235C9F250013F564 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66255BBB235C9F240013F564 /* Main.storyboard */; };
 		66255BD3235CA0A10013F564 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66255BD2235CA0A10013F564 /* MapViewController.m */; };
 		66255BE1235CA5550013F564 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 66255BE3235CA5550013F564 /* Localizable.strings */; };
+		6626F33123B9CC84003001C7 /* VersionTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6626F33023B9CC83003001C7 /* VersionTool.m */; };
+		6626F33423B9CDB7003001C7 /* VersionUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6626F33323B9CDB7003001C7 /* VersionUpdateView.m */; };
 		662DAA2123786D22008AF240 /* YQLocationTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 662DAA2023786D22008AF240 /* YQLocationTransform.m */; };
 		66473C162393B29E003802A2 /* Alarm.m in Sources */ = {isa = PBXBuildFile; fileRef = 66473C152393B29E003802A2 /* Alarm.m */; };
 		66473C192393B7B4003802A2 /* WarnViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 66473C182393B7B4003802A2 /* WarnViewModel.m */; };
@@ -107,9 +110,11 @@
 		669AA11423577D63009A68EA /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 669AA0DE23577D63009A68EA /* BaseModel.m */; };
 		669AA11523577D63009A68EA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 669AA0E323577D63009A68EA /* main.m */; };
 		669AA11623577D63009A68EA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 669AA0E423577D63009A68EA /* AppDelegate.m */; };
+		66DE0C2B2361DCCD00FAF2DC /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DE0C2A2361DCCD00FAF2DC /* SettingViewController.m */; };
 		66DE0C2E2361F70300FAF2DC /* CarTreeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DE0C2D2361F70300FAF2DC /* CarTreeViewController.m */; };
 		66DE0C312361F9C800FAF2DC /* SearchTrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DE0C302361F9C800FAF2DC /* SearchTrackViewController.m */; };
 		66DE0C342361F9FA00FAF2DC /* SearchPlaybackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DE0C332361F9FA00FAF2DC /* SearchPlaybackViewController.m */; };
+		66F3087F242A542900394A69 /* PathUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F3087E242A542900394A69 /* PathUnit.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +147,8 @@
 		660011832375B79800D2C197 /* CustomPaopaoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomPaopaoView.m; sourceTree = "<group>"; };
 		660011852376E32F00D2C197 /* VideoViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoViewModel.h; sourceTree = "<group>"; };
 		660011862376E32F00D2C197 /* VideoViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoViewModel.m; sourceTree = "<group>"; };
+		6608A57B239D23C900FF203E /* WarnDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarnDetailViewController.h; sourceTree = "<group>"; };
+		6608A57C239D23C900FF203E /* WarnDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarnDetailViewController.m; sourceTree = "<group>"; };
 		66161D2E2374454700FE144A /* IJKMediaFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IJKMediaFramework.framework; path = CarEyeClient/IJKMediaFramework.framework; sourceTree = "<group>"; };
 		66161D322374456000FE144A /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
 		66161D342374456800FE144A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -177,6 +184,10 @@
 		66255BD8235CA46D0013F564 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "../zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		66255BE2235CA5550013F564 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		66255BE4235CA5560013F564 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		6626F32F23B9CC83003001C7 /* VersionTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionTool.h; sourceTree = "<group>"; };
+		6626F33023B9CC83003001C7 /* VersionTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionTool.m; sourceTree = "<group>"; };
+		6626F33223B9CDB6003001C7 /* VersionUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionUpdateView.h; sourceTree = "<group>"; };
+		6626F33323B9CDB7003001C7 /* VersionUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionUpdateView.m; sourceTree = "<group>"; };
 		662DAA1F23786D22008AF240 /* YQLocationTransform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YQLocationTransform.h; sourceTree = "<group>"; };
 		662DAA2023786D22008AF240 /* YQLocationTransform.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = YQLocationTransform.m; sourceTree = "<group>"; };
 		66473C142393B29E003802A2 /* Alarm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Alarm.h; sourceTree = "<group>"; };
@@ -301,12 +312,16 @@
 		669AA0E423577D63009A68EA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		669AA0E523577D63009A68EA /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		669AA0E623577D63009A68EA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66DE0C292361DCCD00FAF2DC /* SettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		66DE0C2A2361DCCD00FAF2DC /* SettingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
 		66DE0C2C2361F70300FAF2DC /* CarTreeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CarTreeViewController.h; sourceTree = "<group>"; };
 		66DE0C2D2361F70300FAF2DC /* CarTreeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CarTreeViewController.m; sourceTree = "<group>"; };
 		66DE0C2F2361F9C800FAF2DC /* SearchTrackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchTrackViewController.h; sourceTree = "<group>"; };
 		66DE0C302361F9C800FAF2DC /* SearchTrackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchTrackViewController.m; sourceTree = "<group>"; };
 		66DE0C322361F9FA00FAF2DC /* SearchPlaybackViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchPlaybackViewController.h; sourceTree = "<group>"; };
 		66DE0C332361F9FA00FAF2DC /* SearchPlaybackViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchPlaybackViewController.m; sourceTree = "<group>"; };
+		66F3087D242A542900394A69 /* PathUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathUnit.h; sourceTree = "<group>"; };
+		66F3087E242A542900394A69 /* PathUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PathUnit.m; sourceTree = "<group>"; };
 		783AD29C5F5998AB97389A9E /* libPods-CarEyeClient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CarEyeClient.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C5F6D291EBAE91C1F916138 /* Pods-CarEyeClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarEyeClient.release.xcconfig"; path = "Target Support Files/Pods-CarEyeClient/Pods-CarEyeClient.release.xcconfig"; sourceTree = "<group>"; };
 		CABC340CC5951B6943362853 /* Pods-CarEyeClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarEyeClient.debug.xcconfig"; path = "Target Support Files/Pods-CarEyeClient/Pods-CarEyeClient.debug.xcconfig"; sourceTree = "<group>"; };
@@ -433,6 +448,8 @@
 			children = (
 				66699E85236069CD007A559E /* WarnViewController.h */,
 				66699E86236069CD007A559E /* WarnViewController.m */,
+				6608A57B239D23C900FF203E /* WarnDetailViewController.h */,
+				6608A57C239D23C900FF203E /* WarnDetailViewController.m */,
 			);
 			path = Warn;
 			sourceTree = "<group>";
@@ -616,6 +633,8 @@
 				66255BCE235CA06B0013F564 /* Track */,
 				66255BCF235CA07B0013F564 /* Playback */,
 				66255BD0235CA0840013F564 /* Warn */,
+				66DE0C292361DCCD00FAF2DC /* SettingViewController.h */,
+				66DE0C2A2361DCCD00FAF2DC /* SettingViewController.m */,
 				66DE0C2C2361F70300FAF2DC /* CarTreeViewController.h */,
 				66DE0C2D2361F70300FAF2DC /* CarTreeViewController.m */,
 			);
@@ -711,6 +730,8 @@
 		669AA0CB23577D63009A68EA /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				6626F33223B9CDB6003001C7 /* VersionUpdateView.h */,
+				6626F33323B9CDB7003001C7 /* VersionUpdateView.m */,
 				669AA0CC23577D63009A68EA /* SelectView.m */,
 				669AA0CD23577D63009A68EA /* MJRefreshGif */,
 				669AA0D223577D63009A68EA /* PromptView.m */,
@@ -736,6 +757,10 @@
 		669AA0D723577D63009A68EA /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				66F3087D242A542900394A69 /* PathUnit.h */,
+				66F3087E242A542900394A69 /* PathUnit.m */,
+				6626F32F23B9CC83003001C7 /* VersionTool.h */,
+				6626F33023B9CC83003001C7 /* VersionTool.m */,
 				669AA0D823577D63009A68EA /* MBProgressHUDTool.h */,
 				669AA0DA23577D63009A68EA /* MBProgressHUDTool.m */,
 				669AA0DB23577D63009A68EA /* DateUtil.h */,
@@ -837,7 +862,7 @@
 		669AA04423577CED009A68EA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = CarEye;
 				TargetAttributes = {
 					669AA04B23577CED009A68EA = {
@@ -936,6 +961,7 @@
 				66946E092365F28D004EDA8A /* CarTreeViewModel.m in Sources */,
 				66946E0F236735AC004EDA8A /* CarTreeCell.m in Sources */,
 				6600115F23707F6B00D2C197 /* NSDate+CXCategory.m in Sources */,
+				6626F33423B9CDB7003001C7 /* VersionUpdateView.m in Sources */,
 				669AA10323577D63009A68EA /* BaseNetDataRequestModel.m in Sources */,
 				669AA0F423577D63009A68EA /* JTVerticalCalendarView.m in Sources */,
 				669AA0FF23577D63009A68EA /* NetWorkUtil.m in Sources */,
@@ -960,6 +986,7 @@
 				660011842375B79800D2C197 /* CustomPaopaoView.m in Sources */,
 				660011872376E32F00D2C197 /* VideoViewModel.m in Sources */,
 				669AA0F123577D63009A68EA /* JTCalendarScrollManager.m in Sources */,
+				6626F33123B9CC84003001C7 /* VersionTool.m in Sources */,
 				669AA11223577D63009A68EA /* MBProgressHUDTool.m in Sources */,
 				660011812374777700D2C197 /* TrackViewModel.m in Sources */,
 				669AA10023577D63009A68EA /* BaseNetDataRequestTool.m in Sources */,
@@ -973,6 +1000,7 @@
 				6600115E23707F6B00D2C197 /* CXDatePickerView.m in Sources */,
 				660011512370663300D2C197 /* MapViewModel.m in Sources */,
 				669AA10B23577D63009A68EA /* DES3Util.m in Sources */,
+				6608A57D239D23C900FF203E /* WarnDetailViewController.m in Sources */,
 				669AA0F323577D63009A68EA /* JTCalendarManager.m in Sources */,
 				669AA11623577D63009A68EA /* AppDelegate.m in Sources */,
 				669AA0F723577D63009A68EA /* JTCalendarWeekView.m in Sources */,
@@ -984,7 +1012,9 @@
 				669AA0F023577D63009A68EA /* JTDateHelper.m in Sources */,
 				66473C1C2393BC58003802A2 /* WarnCell.m in Sources */,
 				669AA10423577D63009A68EA /* YYCacheManager.m in Sources */,
+				66F3087F242A542900394A69 /* PathUnit.m in Sources */,
 				669AA0FA23577D63009A68EA /* JTCalendarMenuView.m in Sources */,
+				66DE0C2B2361DCCD00FAF2DC /* SettingViewController.m in Sources */,
 				669AA10C23577D63009A68EA /* SelectView.m in Sources */,
 				66DE0C2E2361F70300FAF2DC /* CarTreeViewController.m in Sources */,
 				6600116E2371C95E00D2C197 /* SearchParam.m in Sources */,
@@ -1157,9 +1187,11 @@
 			baseConfigurationReference = CABC340CC5951B6943362853 /* Pods-CarEyeClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = GZ5MDHTHF6;
+				DEVELOPMENT_TEAM = G5AH4888D9;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1172,6 +1204,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.5;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1241,8 +1274,9 @@
 					"-framework",
 					"\"WebP\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.careye.CarEyeClient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.careye.client;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7s";
 			};
@@ -1253,9 +1287,11 @@
 			baseConfigurationReference = 7C5F6D291EBAE91C1F916138 /* Pods-CarEyeClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = GZ5MDHTHF6;
+				DEVELOPMENT_TEAM = G5AH4888D9;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1268,6 +1304,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.5;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1337,8 +1374,9 @@
 					"-framework",
 					"\"WebP\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.careye.CarEyeClient;
+				PRODUCT_BUNDLE_IDENTIFIER = com.careye.client;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALID_ARCHS = "arm64 armv7s";
 			};

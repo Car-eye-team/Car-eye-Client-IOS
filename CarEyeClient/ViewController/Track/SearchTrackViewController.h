@@ -2,7 +2,7 @@
 //  SearchTrackViewController.h
 //  CarEyeClient
 //
-//  Created by liyy on 2019/10/24.
+//  Created by asd on 2019/10/24.
 //  Copyright © 2019年 CarEye. All rights reserved.
 //
 
@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SearchTrackViewController : BaseViewController
 
-@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *navTitle;
 @property (nonatomic, strong) RACSubject *subject;
 @property (nonatomic, strong) SearchParam *param;
 

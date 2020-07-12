@@ -2,7 +2,7 @@
 //  CarInfoGPS.h
 //  CarEyeClient
 //
-//  Created by liyy on 2019/11/4.
+//  Created by asd on 2019/11/4.
 //  Copyright © 2019年 CarEye. All rights reserved.
 //
 

@@ -229,7 +229,7 @@
                 returnModel.type = ReturnProcess;
                 returnModel.process = (float)uploadProgress.completedUnitCount / (float)uploadProgress.totalUnitCount;
                 [subscriber sendNext:returnModel];
-                [subscriber sendCompleted];
+//                [subscriber sendCompleted];
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 [self dealWithSubscriber:subscriber responseObject:responseObject cache:cache isCache:isCache cacheKey:cacheKey requestModel:model];
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

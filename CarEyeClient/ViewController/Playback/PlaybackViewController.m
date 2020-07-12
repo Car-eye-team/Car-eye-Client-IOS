@@ -2,11 +2,12 @@
 //  PlaybackViewController.m
 //  CarEyeClient
 //
-//  Created by liyy on 2019/10/23.
+//  Created by asd on 2019/10/23.
 //  Copyright © 2019 CarEye. All rights reserved.
 //
 
 #import "PlaybackViewController.h"
+#import "SettingViewController.h"
 #import "SearchPlaybackViewController.h"
 #import "FullPlayerViewController.h"
 #import "PlaybackViewModel.h"
@@ -55,7 +56,8 @@
 }
 
 - (void) setting {
-    
+    SettingViewController *vc = [[SettingViewController alloc] initWithStoryborad];
+    [self basePushViewController:vc];
 }
 
 - (void) search {
@@ -63,6 +65,7 @@
     vc.param = self.viewModel.param;
     [vc.subject subscribeNext:^(SearchParam *p) {
         [self showHub];
+        [self.viewModel.data removeAllObjects];
         
         if (p.channel == 0) {
             self.viewModel.channelID = 1;
@@ -78,7 +81,21 @@
 #pragma mark - LQViewControllerProtocol
 
 - (void)bindViewModel {
-    
+    [self.viewModel.dataSubject subscribeNext:^(id x) {
+        if (self.viewModel.param.channel == 0) {
+//            int max = self.viewModel.param.car.channeltotals + 1;
+//            if (self.viewModel.channelID < max) {
+//                self.viewModel.channelID++;
+//                [self.viewModel.dataCommand execute:nil];
+//            } else {
+                [self hideHub];
+                [self.tableView reloadData];
+//            }
+        } else {
+            [self hideHub];
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 - (PlaybackViewModel *) viewModel {
@@ -101,8 +118,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     PlaybackCell *cell = [PlaybackCell cellWithTableView:tableView];
-    TerminalFile *model = self.viewModel.data[indexPath.row];
-    cell.model = model;
+    
+    if (self.viewModel.data.count > indexPath.row) {
+        TerminalFile *model = self.viewModel.data[indexPath.row];
+        cell.model = model;
+    }
+    
     return cell;
 }
 

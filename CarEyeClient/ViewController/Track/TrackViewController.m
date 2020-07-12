@@ -2,11 +2,12 @@
 //  TrackViewController.m
 //  CarEyeClient
 //
-//  Created by liyy on 2019/10/23.
+//  Created by asd on 2019/10/23.
 //  Copyright © 2019 CarEye. All rights reserved.
 //
 
 #import "TrackViewController.h"
+#import "SettingViewController.h"
 #import "SearchTrackViewController.h"
 #import "TrackViewModel.h"
 #import "SearchParam.h"
@@ -111,7 +112,8 @@
 }
 
 - (void) setting {
-    
+    SettingViewController *vc = [[SettingViewController alloc] initWithStoryborad];
+    [self basePushViewController:vc];
 }
 
 - (void) search {
@@ -241,7 +243,25 @@
 #pragma mark - LQViewControllerProtocol
 
 - (void)bindViewModel {
-    
+    [self.vm.dataSubject subscribeNext:^(id x) {
+        [self hideHub];
+        
+        if (self.vm.data.count == 0) {
+            [self showTextHubWithContent:@"设备异常"];
+        } else if (self.vm.data.count == 1) {
+            [self showTextHubWithContent:@"暂无该时间段的轨迹信息"];
+        } else {
+            self.currentIndex = 0;
+            [self startSearch];
+            // 开始画图
+            [self addCustomElementsDemoTwo];
+            
+            [self.slider2 setMinimumValue:0];
+            [self.slider2 setMaximumValue:self.vm.data.count];
+            
+            [self startTimer];
+        }
+    }];
 }
 
 - (TrackViewModel *) vm {
@@ -389,6 +409,12 @@
 }
 
 - (void) startTimer {
+    if (self.latLngS.count == 0) {
+        return;
+    }
+    
+    [self stopTimer];
+    
     self.startBtn.selected = YES;
     
     if (@available(iOS 10.0, *)) {
@@ -469,7 +495,7 @@
 - (void)onGetReverseGeoCodeResult:(BMKGeoCodeSearch *)searcher result:(BMKReverseGeoCodeSearchResult *)result errorCode:(BMKSearchErrorCode)error {
     if (error == BMK_SEARCH_NO_ERROR) {
         //在此处理正常结果
-        BMKPoiInfo *POIInfo = result.poiList[0];
+//        BMKPoiInfo *POIInfo = result.poiList[0];
         BMKSearchRGCRegionInfo *regionInfo = [[BMKSearchRGCRegionInfo alloc] init];
         if (result.poiRegions.count > 0) {
             regionInfo = result.poiRegions[0];
