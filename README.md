@@ -23,18 +23,17 @@ IOS9以上。
 链接：https://pan.baidu.com/s/1z1_1BrSWaHJkDzgzHUxqvg 
 提取码：7kmk
 
+# 联系我们   
 
-# 体验平台登录方式
+car-eye 开源官方网址：www.car-eye.cn     
 
-web登录地址：www.liveoss.com:8088    
-账号：test      
-密码：123456     
+car-eye 流媒体平台网址：www.liveoss.com     
 
-客户端的登录账号     
-账号：test    
-密码：123456   
-服务器：www.liveoss.com     
+car-eye 技术官方邮箱: support@car-eye.cn   
 
-通信平台的IP:39.108.246.45
-端口：9999
-登陆平台后选一个不在线的车，把设备上的终端号设置成一样，就可以连接上平台。
+car-eye技术交流QQ群: 590411159      
+
+![](https://github.com/Car-eye-team/Car-eye-server/blob/master/car-server/doc/QQ.jpg)    
+
+CopyRight©  car-eye 开源团队 2018 
+
