@@ -23,3 +23,18 @@ IOS9以上。
 链接：https://pan.baidu.com/s/1z1_1BrSWaHJkDzgzHUxqvg 
 提取码：7kmk
 
+
+# 体验平台登录方式
+
+web登录地址：www.liveoss.com:8088    
+账号：test      
+密码：123456     
+
+客户端的登录账号     
+账号：test    
+密码：123456   
+服务器：www.liveoss.com     
+
+通信平台的IP:39.108.246.45
+端口：9999
+登陆平台后选一个不在线的车，把设备上的终端号设置成一样，就可以连接上平台。
