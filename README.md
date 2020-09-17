@@ -16,7 +16,7 @@ IOS9以上。
 
 # 运行画面展示
 
-![](https://github.com/Car-eye-team/Car-eye-Client-IOS/blob/master/client.png)
+![](https://gitee.com/careye_open_source_platform_group/Car-eye-Client-ios/raw/master/client.png)
 
 # 特别说明
 
