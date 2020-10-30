@@ -23,7 +23,7 @@ IOS9以上。
 源码中有一个播放器库由于git上传收到限制，如使用本软件请从百度网盘下载该资源：
 链接：https://pan.baidu.com/s/1xDw_Yd-THmvvNQSEggmPjw 
 提取码：4n77 
-
+下载后放在Car-eye-Client-IOS/CarEyeClient目录下即可
 
 # 联系我们
 
