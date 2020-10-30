@@ -21,8 +21,8 @@ IOS9以上。
 # 特别说明
 
 源码中有一个播放器库由于git上传收到限制，如使用本软件请从百度网盘下载该资源：
-链接：https://pan.baidu.com/s/1z1_1BrSWaHJkDzgzHUxqvg 
-提取码：7kmk
+链接：https://pan.baidu.com/s/1xDw_Yd-THmvvNQSEggmPjw 
+提取码：4n77 
 
 
 # 联系我们
